@@ -23,6 +23,9 @@ public class GreetingKafkaTest {
     @RepeatedTest(20)
     public void testHelloKafka(RepetitionInfo repetitionInfo) {
         final int testN = repetitionInfo.getCurrentRepetition();
+        if (testN==1) {
+            CriticalResourceManager.reset();
+        }
         final String message = "Hello " + testN;
         greetingEmitter.send(message);
 

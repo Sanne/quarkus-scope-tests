@@ -1,6 +1,7 @@
 package org.acme;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.control.ActivateRequestContext;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -21,8 +22,8 @@ public class KafkaListener {
 	public GloballyScopedThing globalThing;
 
 	@Incoming("main-channel")
-//	@Blocking
 	@Acknowledgment(Acknowledgment.Strategy.POST_PROCESSING)
+	@ActivateRequestContext
 	public void receive(String event) {
 		log.info("Kafka event received, {}", event);
 		globalThing.actOnGlobalThing(event);

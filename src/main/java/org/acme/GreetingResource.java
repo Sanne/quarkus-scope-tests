@@ -30,6 +30,15 @@ public class GreetingResource {
     @Path("/instanceDestroyedCount")
     @Produces(MediaType.TEXT_PLAIN)
     public int instanceDestroyedCount() {
-        return CriticalResourceManager.producerCallsCount();
+        return CriticalResourceManager.disposerCallsCount();
     }
+
+    @GET
+    @Path("/reset")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String reset() {
+        CriticalResourceManager.reset();
+        return "OK";
+    }
+
 }

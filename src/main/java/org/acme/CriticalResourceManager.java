@@ -17,7 +17,12 @@ public class CriticalResourceManager {
 
 	private static final Logger LOG = Logger.getLogger(CriticalResourceManager.class);
 
-	@Produces @RequestScoped
+	public static void reset() {
+		producerCalls.set(0);
+		disposerCalls.set(0);
+	}
+
+    @Produces @RequestScoped
 	public CriticalResource produceInstance() {
 		producerCalls.incrementAndGet();
 		final String id = UUID.randomUUID().toString();
